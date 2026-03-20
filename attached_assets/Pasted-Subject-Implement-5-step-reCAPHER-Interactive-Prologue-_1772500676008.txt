@@ -1,0 +1,67 @@
+Subject: Implement 5-step "reCAPHER" Interactive Prologue from Figma
+
+Figma Reference: [Paste your Figma URL here]
+
+Technical Requirements:
+
+Component Structure: Create a new component CAPHERGate.tsx. Use a state variable to manage 6 distinct steps (0-5).
+
+State Management: The main application should only render the Home content after the isVerified state is set to true at the final step.
+
+Tech Stack: Use React, Tailwind CSS for styling, and framer-motion for glitch-like transitions between steps.
+
+The 5-Step Logic:
+
+Step 0 (Intro)
+
+Headline: ACCESSING 4♀️4 ZONE
+
+Status: [SYSTEM AUDIT IN PROGRESS]
+
+Copy: "Social media algorithms are cutting off access to vital health knowledge. To enter, we require your 'Human Consensus' to assist in an ongoing algorithmic stress test. Please complete the reCAPHER verification to proceed. All data is collected anonymously."
+
+Button: [START HUMAN AUDIT]
+
+Step 1 (Checkbox)
+
+Interactive: A custom reCAPTCHA-style checkbox.
+
+Label: "I have the right to discuss my body"
+
+Step 2 (The Fragmented Truth)
+
+Interactive: A 3x3 grid of a medical diagram image.
+
+Logic: Images start shuffled or rotated. User must click tiles to reassemble the image.
+
+Step 3 (Linguistic Decipher)
+
+Prompt: "The algorithm has censored this word. Decode it to proceed."
+
+Display: V4G1N4
+
+Input: A text field where the user must type "VAGINA" to unlock the next step.
+
+Step 4 (Anatomical Selection)
+
+Task: "Select all squares containing anatomical structures for health education."
+
+Grid: 3x3 grid using images from /public/assets/. Include male vs. female medical comparison images.
+
+Logic: Enable the [VERIFY] button only when correct clinical images are selected.
+
+Step 5 (Narrative Receipt)
+
+Headline: IDENTITY RECLAIMED
+
+Copy: "You’ve just navigated the same digital obstacle course that thousands of women face every day. You checked the boxes they try to uncheck. You reassembled the images they try to fragment. You decoded the language they try to censor. This wasn't a test of your humanity—it was a test of the system’s bias. Welcome to the Archive."
+
+Final CTA: [ENTER THE ARCHIVE]
+
+Design Instructions:
+
+Match the ASCII/Terminal aesthetic and borders exactly as shown in the Figma.
+
+Apply a 'scanning' or 'glitch' animation during step transitions.
+
+Ensure the layout is fully responsive and optimized for Chrome.
