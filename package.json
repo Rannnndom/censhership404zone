@@ -2,7 +2,6 @@
   "name": "censhership404zone",
   "version": "1.0.0",
   "type": "module",
-  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,7 +9,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "@jridgewell/trace-mapping": "^0.3.25",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -49,7 +47,6 @@
     "lucide-react": "^0.545.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.0",
-    "react-day-picker": "^9.11.1",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.0",
     "react-resizable-panels": "^2.1.9",
@@ -64,9 +61,8 @@
     "zod-validation-error": "^3.4.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/vite": "^4.1.14",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
