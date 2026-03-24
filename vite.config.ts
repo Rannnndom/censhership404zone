@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
-  base: "/",   // ⭐ 非常重要
+  base: "/",   // 非常关键，解决 JS 路径问题
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -17,5 +17,6 @@ export default defineConfig({
   build: {
     outDir: "../dist",
     emptyOutDir: true,
+    assetsDir: "assets"
   },
 });
