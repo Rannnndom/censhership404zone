@@ -81,7 +81,7 @@ export default function About() {
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">The Mission</h2>
             <div className="text-lg md:text-xl leading-relaxed space-y-6 opacity-80 font-normal">
               <p>
-                404Zone exists to map the void. Our mission is to create a decentralized, immutable archive of digital censorship. By systematically tracking the erasure of women's health content, we transform isolated incidents into undeniable data. We empower creators, healthcare professionals, and organizations to prove what the platforms deny: that the truth is being systematically treated as sensitive content.
+                404Zone exists to map the void. Our mission is to create a decentralized, immutable archive of digital censorship. We do not just record the past; we leverage this evidence to challenge Big Tech’s content moderation standards. By exposing the systemic bias in their code, we drive the necessary evolution toward a digital landscape where women’s bodies are no longer censored by default.
               </p>
             </div>
           </motion.section>
