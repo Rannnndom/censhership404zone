@@ -4,19 +4,18 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
-  base: "/",   // 非常关键，解决 JS 路径问题
+  base: "/",
   plugins: [react(), tailwindcss()],
+  root: "client",
+  build: {
+    outDir: "../dist",
+    emptyOutDir: true
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
-  },
-  root: "client",
-  build: {
-    outDir: "../dist",
-    emptyOutDir: true,
-    assetsDir: "assets"
   },
 });
