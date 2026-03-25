@@ -129,9 +129,6 @@ export default function CAPTHERGate({ onVerified }: { onVerified: () => void }) 
                   </div>
                   <div className="flex flex-col items-center gap-1">
                     <img src={LOGO_IMG} alt="reCAPTHER" className="h-14 object-contain opacity-80" />
-                    <span className="text-[11px] font-bold tracking-tighter text-neutral-400 uppercase font-mono">
-                      reCAP<span className="text-black">T</span>HER
-                    </span>
                   </div>
                 </div>
               </motion.div>
