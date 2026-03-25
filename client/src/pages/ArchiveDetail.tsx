@@ -20,7 +20,7 @@ const MOCK_DATA = {
   dot: "bg-red-500",
   images: [img1, img2, img3, img4, img5],
   timeline: [
-    { action: "CONTENT POSTED", date: "8 YEARS AGO" },
+    { action: "CONTENT POSTED", date: "JAN 16" },
     { action: "GUIDELINES WARNING", date: "JAN 20" },
     { action: "ACCOUNT RESTRICTED", date: "FEB 04" },
     { action: "ACCOUNT DELETED", date: "2020" }
