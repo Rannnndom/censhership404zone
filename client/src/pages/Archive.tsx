@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "wouter";
-import { ArrowRight } from "lucide-react"; 
+import { ArrowRight, X } from "lucide-react"; 
 import logoImg from "@assets/Group_1_1772194218007.png";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const KEYWORDS = ["CensHership", "404", "ERROR_404", "Period", "Cycle", "Vulva", "Lactation"];
 
@@ -44,12 +44,33 @@ const archiveData: ArchiveItem[] = [
 const ArchivePage: React.FC = () => {
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const [selectedUserTypes, setSelectedUserTypes] = useState<string[]>([]);
 
-  const filteredData = archiveData.filter(item => 
-    item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const toggleStatus = (s: string) => {
+    setSelectedStatuses(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
+  };
+
+  const togglePlatform = (p: string) => {
+    setSelectedPlatforms(prev => prev.includes(p) ? prev.filter(x => x !== p) : [...prev, p]);
+  };
+
+  const toggleUserType = (u: string) => {
+    setSelectedUserTypes(prev => prev.includes(u) ? prev.filter(x => x !== u) : [...prev, u]);
+  };
+
+  const filteredData = archiveData.filter(item => {
+    const matchesSearch = item.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.name.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.includes(item.status);
+    // As mock data doesn't have platform and userType yet, we just ignore them in the actual filter for now to show all results.
+    
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <div className="min-h-screen bg-white font-mono text-black selection:bg-black selection:text-white flex flex-col relative">
@@ -96,7 +117,10 @@ const ArchivePage: React.FC = () => {
           {/* 修改后的 CTA 按钮区域 */}
           <div className="flex gap-4">
             {/* FILTER: 改为白底黑框黑字 */}
-            <button className="bg-white text-black border border-black px-8 py-3 font-bold tracking-tight hover:bg-[#FF4747] hover:text-white hover:border-[#FF4747] transition-all">
+            <button 
+              onClick={() => setIsFilterOpen(true)}
+              className="bg-white text-black border border-black px-8 py-3 font-bold tracking-tight hover:bg-[#FF4747] hover:text-white hover:border-[#FF4747] transition-all"
+            >
               FILTER
             </button>
 
@@ -167,6 +191,105 @@ const ArchivePage: React.FC = () => {
         <div>© 2026 CENSHERSHIP_404_ZONE / ALL_RIGHTS_RESERVED</div>
         <div>[ EVIDENCE_BASED_DESIGN_V2.9_STABLE ]</div>
       </footer>
+
+      {/* FILTER SIDEBAR */}
+      <AnimatePresence>
+        {isFilterOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsFilterOpen(false)}
+              className="fixed inset-0 bg-black z-40"
+            />
+            
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed top-0 left-0 bottom-0 w-[350px] bg-black text-white z-50 p-8 overflow-y-auto font-mono flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-12">
+                <h2 className="text-2xl font-bold uppercase tracking-widest">Filters</h2>
+                <button onClick={() => setIsFilterOpen(false)} className="hover:text-[#FF4747] transition-colors">
+                  <X size={28} />
+                </button>
+              </div>
+
+              {/* Status */}
+              <div className="mb-8">
+                <h3 className="text-sm text-neutral-400 mb-4 uppercase tracking-widest border-b border-neutral-800 pb-2">Status</h3>
+                <div className="flex flex-col gap-3">
+                  {['REMOVED', 'SUPPRESSED', 'REJECTED', 'ACCOUNT AT RISK'].map(s => (
+                    <label key={s} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedStatuses.includes(s)}
+                        onChange={() => toggleStatus(s)}
+                        className="w-5 h-5 appearance-none border-2 border-white checked:bg-white checked:border-white relative flex items-center justify-center after:content-[''] checked:after:block after:hidden after:w-2 after:h-2 after:bg-black transition-colors"
+                      />
+                      <span className="text-sm uppercase group-hover:text-[#FF4747] transition-colors">{s}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Platform */}
+              <div className="mb-8">
+                <h3 className="text-sm text-neutral-400 mb-4 uppercase tracking-widest border-b border-neutral-800 pb-2">Platform</h3>
+                <div className="flex flex-col gap-3">
+                  {['Instagram', 'TikTok', 'Facebook', 'X'].map(p => (
+                    <label key={p} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedPlatforms.includes(p)}
+                        onChange={() => togglePlatform(p)}
+                        className="w-5 h-5 appearance-none border-2 border-white checked:bg-white checked:border-white relative flex items-center justify-center after:content-[''] checked:after:block after:hidden after:w-2 after:h-2 after:bg-black transition-colors"
+                      />
+                      <span className="text-sm uppercase group-hover:text-[#FF4747] transition-colors">{p}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* User Type */}
+              <div className="mb-8">
+                <h3 className="text-sm text-neutral-400 mb-4 uppercase tracking-widest border-b border-neutral-800 pb-2">User Type</h3>
+                <div className="flex flex-col gap-3">
+                  {['Individual User', 'Brand / Organization'].map(u => (
+                    <label key={u} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={selectedUserTypes.includes(u)}
+                        onChange={() => toggleUserType(u)}
+                        className="w-5 h-5 appearance-none border-2 border-white checked:bg-white checked:border-white relative flex items-center justify-center after:content-[''] checked:after:block after:hidden after:w-2 after:h-2 after:bg-black transition-colors"
+                      />
+                      <span className="text-sm uppercase group-hover:text-[#FF4747] transition-colors">{u}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-auto pt-8">
+                <button 
+                  onClick={() => {
+                    setSelectedStatuses([]);
+                    setSelectedPlatforms([]);
+                    setSelectedUserTypes([]);
+                  }}
+                  className="w-full border-2 border-white py-3 text-sm font-bold uppercase hover:bg-white hover:text-black transition-colors"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
